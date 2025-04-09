@@ -39,6 +39,7 @@ if (process.env.NODE_ENV !== 'test') {
   if (process.argv.length < 4) {
     console.log('Please provide two numbers as arguments');
     console.log('Usage: node index.js <number1> <number2>');
+    console.log('Example: node index.js 1 2');
     process.exit(1);
   }
 

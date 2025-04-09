@@ -3,4 +3,8 @@ dist/
 coverage/
 .env
 *.log
-.DS_Store 
+.DS_Store
+
+# Watchman
+.watchmanconfig
+.watchman 
