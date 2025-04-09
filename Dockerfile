@@ -1,15 +1,28 @@
-FROM node:20-slim
+# Build stage
+FROM node:20-slim AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
-COPY tsconfig.json ./
+COPY tsconfig*.json ./
+COPY jest.config.js ./
 COPY src ./src
 
 RUN npm install
+RUN npm run test
 RUN npm run build
 
-# Remove development dependencies
-RUN npm prune --production
+# Production stage
+FROM node:20-slim
 
-CMD ["node", "dist/index.js"] 
+WORKDIR /app
+
+COPY --from=builder /app/dist/index.min.js ./dist/
+COPY --from=builder /app/package*.json ./
+
+RUN npm install --production
+
+# Set NODE_ENV
+ENV NODE_ENV=production
+
+CMD ["node", "dist/index.min.js"] 

@@ -1,24 +1,134 @@
-1. page 1. create a title, row, seats per row (so inception 8, 10) meaning we are creating 80 seats
-2. show menu, choose 1,2,3
-3. 1 start booking flow
-4. enter number of seats (not enough reprompt) meaning 80 seats not enough
-5. generate booking id
-6. show seat graph (select base on rules) with system choose seats
-7. user can choose a new row
-8. user enter blank to book
-9. display menu choose 1,2,3 (calcuate leftover seats)
-10. 2 start checking
-11. enter booking id
+# Number Addition Program
 
+A simple TypeScript program that adds two numbers together, with robust input validation and error handling.
 
-notes:
-1. not exe
-2. choose typescript
-3. tdd, unit test
-4. modular, SOLID, good design pattern
-5. introductino of my code and design patterns and assumptions
-6. instruction to run (maybe use docker-compose) windows or linux
-7. productions ready
-    1. husky
-    2. lint
-    3. push check and run test
+## Tech Stack
+
+- **TypeScript**: For type-safe JavaScript development
+- **Node.js**: Runtime environment
+- **Jest**: Testing framework
+- **Docker**: Containerization
+
+## Features
+
+- Adds two numbers together
+- Supports both number and string inputs
+- Handles various edge cases:
+  - Null/undefined values
+  - Invalid number strings
+  - Infinite numbers
+  - Whitespace in string inputs
+- Comprehensive error messages
+- Command-line interface support
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd <folder>
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+## Docker
+
+### Building the Docker Image
+
+```bash
+# Build the Docker image
+docker build -t number-addition .
+```
+
+### Running with Docker
+
+```bash
+# Run the container
+docker run number-addition 5 3
+```
+
+### Docker Development
+
+For development with hot-reload:
+
+```bash
+# Build and run with volume mounting for development
+docker run -v $(pwd):/app -w /app number-addition npm run dev
+```
+
+## Usage
+
+### As a Module
+
+```typescript
+import { addSum } from './src';
+
+// Using numbers
+const result1 = addSum(5, 3); // Returns 8
+
+// Using strings
+const result2 = addSum('5', '3'); // Returns 8
+
+// Mixed types
+const result3 = addSum(5, '3'); // Returns 8
+```
+
+### Command Line Interface
+
+Run the program with two numbers as arguments:
+
+```bash
+npm start -- 5 3
+# or
+node dist/index.js 5 3
+```
+
+## Running Tests
+
+```bash
+npm test
+```
+
+## Error Handling
+
+The program handles various error cases:
+
+- Null or undefined inputs
+- Invalid number strings
+- Infinite numbers
+- Whitespace in string inputs
+
+Example error messages:
+
+```
+Invalid input: Parameters cannot be null or undefined
+Invalid input: Cannot convert "abc" and/or "3" to numbers
+Invalid input: Numbers must be finite
+```
+
+## Development
+
+1. Build the TypeScript code:
+
+```bash
+npm run build
+```
+
+2. Run in development mode:
+
+```bash
+npm run dev
+```
+
+## License
+
+[Your chosen license]
+
+```
+
+```
