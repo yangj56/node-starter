@@ -9,10 +9,10 @@
       "webRoot": "${workspaceFolder}"
     },
     {
-      "name": "movie-app",
+      "name": "node-starter",
       "type": "node-terminal",
       "request": "launch",
-      "command": "npm test -- index.test.ts",
+      "command": "npm run dev",
       // "command": "npm run dev",
       "cwd": "${workspaceFolder}/"
     }

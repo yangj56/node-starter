@@ -1,12 +1,15 @@
 import eslint from '@eslint/js';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
+import jestPlugin from 'eslint-plugin-jest';
+import sonarjs from 'eslint-plugin-sonarjs';
 
 export default [
   {
     ignores: ['dist/**/*'],
   },
   eslint.configs.recommended,
+  sonarjs.configs.recommended,
   {
     files: ['src/**/*.ts'],
     ignores: ['**/__tests__/**'],
@@ -19,14 +22,11 @@ export default [
       globals: {
         process: true,
         console: true,
-        describe: true,
-        test: true,
-        expect: true,
-        jest: true,
-        beforeEach: true,
-        afterEach: true,
-        beforeAll: true,
-        afterAll: true,
+        setTimeout: true,
+        setInterval: true,
+        clearInterval: true,
+        clearTimeout: true,
+        NodeJS: true,
       },
     },
     plugins: {
@@ -34,6 +34,7 @@ export default [
     },
     rules: {
       ...tseslint.configs.recommended.rules,
+      'sonarjs/cognitive-complexity': ['error', 45],
     },
   },
   {
@@ -45,22 +46,21 @@ export default [
         sourceType: 'module',
       },
       globals: {
-        console: true,
-        describe: true,
-        test: true,
-        expect: true,
-        jest: true,
-        beforeEach: true,
-        afterEach: true,
-        beforeAll: true,
-        afterAll: true,
+        setTimeout: true,
+        setInterval: true,
+        clearInterval: true,
+        clearTimeout: true,
+        ...jestPlugin.configs['flat/recommended'].languageOptions.globals,
       },
     },
     plugins: {
       '@typescript-eslint': tseslint,
+      ...jestPlugin.configs['flat/recommended'].plugins,
     },
     rules: {
       ...tseslint.configs.recommended.rules,
+      ...jestPlugin.configs['flat/recommended'].rules,
+      'sonarjs/constructor-for-side-effects': 'off',
     },
   },
 ];
